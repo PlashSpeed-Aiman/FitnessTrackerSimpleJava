@@ -6,7 +6,22 @@ import java.util.Scanner;
 
 public class Main {
 
+    public static void updateGoals(){
+        Scanner input = new Scanner(System.in);
+        PrintWriter printWriter;
+        var goal = getGoals();
+        goal[2] = input.nextLine();
+        try {
+            printWriter = new PrintWriter("goals.txt");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        printWriter.println(goal[0]);
+        printWriter.println(goal[1]);
+        printWriter.println(goal[2]);
+        printWriter.close();
 
+    }
     public static String[] getGoals(){
         File file = new File("goals.txt");
         String[] goal = new String[3];
@@ -102,6 +117,12 @@ public class Main {
         System.out.println("Your Target is "+ retrivedGoal[1]);
         System.out.println("Your Current Value is "+ retrivedGoal[2]);
         System.out.println("You are " + (Integer.parseInt(retrivedGoal[1]) - Integer.parseInt(retrivedGoal[2])) + " away from your goal");
+        updateGoals();
+        var anotherGoal = getGoals();
+        System.out.println("Your Goal is "+ retrivedGoal[0]);
+        System.out.println("Your Target is "+ retrivedGoal[1]);
+        System.out.println("Your Current Value is "+ retrivedGoal[2]);
+        System.out.println("You are " + (Integer.parseInt(anotherGoal[1]) - Integer.parseInt(anotherGoal[2])) + " away from your goal");
     }
     public static void main(String[] args) {
 
